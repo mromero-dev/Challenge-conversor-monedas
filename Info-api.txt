@@ -1,0 +1,10 @@
+URL:https://v6.exchangerate-api.com/v6/API-KEY/latest/COIN
+KEY:1de292ea0d09750a9657f793
+
+Observaciones:
+Cambiar API-KEY por nuestra llave
+Cambiar COIN por la moneda a consultar
+
+-----------------------------------------------
+Consular dos monedas
+URL: https://v6.exchangerate-api.com/v6/YOUR-API-KEY/pair/EUR/GBP
