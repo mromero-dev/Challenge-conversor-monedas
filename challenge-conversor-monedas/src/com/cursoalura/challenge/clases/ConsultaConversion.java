@@ -12,7 +12,7 @@ import java.net.http.HttpResponse;
 
 public class ConsultaConversion {
 
-    private static final String API_KEY = "1de292ea0d09750a9657f793";
+    private static final String API_KEY = "_Introduce_";
     private static final String BASE_URL = "https://v6.exchangerate-api.com/v6/";
 
     public StandardResponse standardResponse(String baseCode) {
