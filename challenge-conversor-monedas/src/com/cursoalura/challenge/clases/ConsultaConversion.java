@@ -1,6 +1,5 @@
 package com.cursoalura.challenge.clases;
 
-import com.cursoalura.challenge.records.PairConversion;
 import com.cursoalura.challenge.records.StandardResponse;
 import com.cursoalura.challenge.records.SupportedCodes;
 import com.google.gson.Gson;
@@ -29,25 +28,7 @@ public class ConsultaConversion {
             return new Gson().fromJson(response.body(), StandardResponse.class);
 
         } catch (IOException | InterruptedException e) {
-            throw new RuntimeException("Moneda no encontrada.");
-        }
-    }
-
-    public PairConversion pairResponse(String baseCode, String targetCode, double amount) {
-        URI url = URI.create(BASE_URL + API_KEY + "/pair/" + baseCode + "/"
-                + targetCode + "/" + amount);
-
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(url)
-                .build();
-        try {
-            HttpResponse<String> response = client
-                    .send(request, HttpResponse.BodyHandlers.ofString());
-            return new Gson().fromJson(response.body(), PairConversion.class);
-
-        } catch (IOException | InterruptedException e) {
-            throw new RuntimeException("Moneda no encontrada.");
+            throw new RuntimeException("ConsultaConversion/standardResponse: " + e.getMessage());
         }
     }
 
@@ -64,9 +45,8 @@ public class ConsultaConversion {
             return new Gson().fromJson(response.body(), SupportedCodes.class);
 
         } catch (IOException | InterruptedException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("ConsultaConversion/supportedCodes: " + e);
         }
     }
-
 
 }

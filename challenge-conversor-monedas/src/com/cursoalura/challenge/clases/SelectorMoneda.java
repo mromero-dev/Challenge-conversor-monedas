@@ -64,16 +64,16 @@ public class SelectorMoneda {
         return new String[]{origen, destino};
     }
 
-    public void listStandarResponse(StandardResponse standardResponse){
-        if (standardResponse == null){
+    public void listStandarResponse(StandardResponse standardResponse) {
+        if (standardResponse == null) {
             JOptionPane.showMessageDialog(null, "No se pudo obtener información.",
                     "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        StringBuilder sb = new StringBuilder("Tasas de conversión para: "+standardResponse.base_code() + "\n\n");
+        StringBuilder sb = new StringBuilder("Tasas de conversión para: " + standardResponse.base_code() + "\n\n");
 
-        standardResponse.conversion_rates().forEach((moneda, valor) ->{
+        standardResponse.conversion_rates().forEach((moneda, valor) -> {
             sb.append(moneda).append(": ").append(valor).append("\n");
         });
 
@@ -82,6 +82,33 @@ public class SelectorMoneda {
 
         JScrollPane jScrollPane = new JScrollPane(textArea);
         JOptionPane.showMessageDialog(null, jScrollPane, "Conversiones",
+                JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public void listarPairConversion(StandardResponse standardResponse, String origen, String destino, double monto) {
+        if (standardResponse == null) {
+            JOptionPane.showMessageDialog(null, "No se pudo obtener información.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        Double tasaDestino = standardResponse.conversion_rates().get(destino);
+
+        if (tasaDestino == null) {
+            JOptionPane.showMessageDialog(null, "No se encontró la moneda destino.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        double resultado = monto * tasaDestino;
+
+        String mensajeSalida = String.format(
+                "%.2f %s = %.2f %s",
+                monto, origen, resultado, destino
+        );
+
+        JOptionPane.showMessageDialog(null, mensajeSalida,
+                "Resultado de Conversión",
                 JOptionPane.INFORMATION_MESSAGE);
     }
 }
